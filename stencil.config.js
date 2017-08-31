@@ -1,6 +1,7 @@
 exports.config = {
+  publicPath: '/build',
   bundles: [
-    { components: ['my-name'] }
+    { components: ['my-app', 'my-header','my-routes','my-name', 'my-address'] }
   ],
   collections: [
     { name: '@stencil/router' }

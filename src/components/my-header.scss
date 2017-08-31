@@ -1,0 +1,20 @@
+
+my-name {
+  font-family: Courier New, Courier, monospace;
+  font-weight: bold;
+}
+
+stencil-route-link a {
+  margin-left: 10px;
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+
+
+stencil-route-link.link-active {
+  font-weight: bold;
+}

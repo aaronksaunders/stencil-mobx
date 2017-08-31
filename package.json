@@ -13,8 +13,9 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@stencil/core": "next",
-    "@stencil/router": "0.0.4"
+    "@stencil/core": "latest",
+    "@stencil/router": "0.0.6",
+    "mobx": "^3.2.2"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
