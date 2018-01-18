@@ -11,12 +11,11 @@ export class MyRoutes {
         return (
             <stencil-router id="router">
                 <stencil-route url="/" component="my-name"
-                    router="#router"
                     componentProps={{ first: "Aaron", last: "Saunders" }}
                     exact={true}
                 />
                 <stencil-route url="/address"
-                    component="my-address" router="#router"
+                    component="my-address"
                     componentProps={{ 'city': "Washington", 'state': "DC" }}
                     exact={true} />
             </stencil-router>)

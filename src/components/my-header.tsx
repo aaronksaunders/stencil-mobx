@@ -10,13 +10,11 @@ export class HeaderComponent {
         return (
             [<h3>Router & Props Test w/Stencil </h3>,
             <stencil-route-link
-                url="/"
-                router="#router">
+                url="/" >
                 Show Name
             </stencil-route-link>,
             <stencil-route-link
-                url="/address"
-                router="#router">
+                url="/address" >
                 Show Address
             </stencil-route-link>
             ])

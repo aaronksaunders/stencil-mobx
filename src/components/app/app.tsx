@@ -1,13 +1,14 @@
 import { Component, State } from '@stencil/core';
 import store from '../store';
-import { autorun } from 'mobx';
+import { autorun, observable } from 'mobx';
 
 
 @Component({
     tag: 'my-app',
     //styleUrl: 'my-name.scss'
 })
-export class App {
+
+export observable(class App {
 
     @State() todos: any
     @State() title: string
@@ -35,15 +36,15 @@ export class App {
                 <div class="level">
                     <div class="level-item">
                         <button class="button" onClick={() => store.add(this.title)}>ADD</button>
-                        <input class="input" placeholder="enter the title" onChange={(e:any) => {
+                        <input class="input" placeholder="enter the title" onChange={(e: any) => {
                             this.title = e.target.value
                             console.log(e.target.value)
                         }} />
                     </div>
-                    <h4  class="level-item">Unfinished: {store.unfinishedTodoCount}</h4>
+                    <h4 class="level-item">Unfinished: {store.unfinishedTodoCount}</h4>
                 </div>
                 {this.renderTodos()}
             </div >
         )
     }
-}
+})
