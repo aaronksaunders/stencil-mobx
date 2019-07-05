@@ -36,8 +36,8 @@ export class App {
                     <div class="level-item">
                         <button class="button" onClick={() => store.add(this.title)}>ADD</button>
                         <input class="input" placeholder="enter the title" onChange={(e: any) => {
-                            this.title = e.target.value
-                            console.log(e.target.value)
+                            this.title = e.target.value;
+                            console.log(e.target.value);
                         }} />
                     </div>
                     <h4 class="level-item">Unfinished: {store.unfinishedTodoCount}</h4>

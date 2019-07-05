@@ -17,6 +17,7 @@ export class MyRoutes {
                     component="my-address"
                     componentProps={{ 'city': "Washington", 'state': "DC" }}
                     exact={true} />
-            </stencil-router>)
+            </stencil-router>
+        );
     }
 }
