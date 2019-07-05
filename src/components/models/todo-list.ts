@@ -12,7 +12,6 @@ export class TodoList {
         // this allows multiple independent mobx instances per page
         // (good for isolated web components)
         extras.isolateGlobalState();
-
     }
 
     @computed
@@ -23,7 +22,7 @@ export class TodoList {
 
     @action
     public add(todoTitle: string) {
-        this.todos.push(new Todo(todoTitle))
+        this.todos.push(new Todo(todoTitle));
     }
 
     @action
