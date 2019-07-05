@@ -1,7 +1,7 @@
 // @ts-ignore
 import {Component, h, State} from '@stencil/core';
 import store from '../todo-list.store';
-import {autorun} from 'mobx';
+import {autorun, computed} from 'mobx';
 
 
 @Component({
@@ -10,22 +10,22 @@ import {autorun} from 'mobx';
 })
 export class App {
 
-    @State() todos: any;
     @State() title: string;
 
     constructor() {
         autorun(() => {
             // console.log(store)
-            console.log(store.unfinishedTodoCount);
-            this.todos = store.todos.slice()
+            // console.log(store.unfinishedTodoCount);
+            // this.todos = store.todos.slice()
         })
     }
 
-    renderTodos = () => {
-        return this.todos ? this.todos.map((m) => {
-            return (<div>{m.title} {m.createdOn}  {m.finished}</div>)
-        }) : null
-    };
+    @computed
+    public get renderedTodos() {
+        return store.todos.map((m) => {
+            return (<div>{m.title} {new Date(m.createdOn).toISOString()}  {m.finished}</div>)
+        })
+    }
 
     render() {
         return (
@@ -42,7 +42,7 @@ export class App {
                     </div>
                     <h4 class="level-item">Unfinished: {store.unfinishedTodoCount}</h4>
                 </div>
-                {this.renderTodos()}
+                {this.renderedTodos}
             </div >
         )
     }
