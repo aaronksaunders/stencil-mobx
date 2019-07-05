@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import {Component, h} from '@stencil/core';
 
 @Component({
     tag: 'my-header',
@@ -7,8 +7,8 @@ import { Component, h } from '@stencil/core';
 export class HeaderComponent {
 
     render() {
-        return (
-            [<h3>Router & Props Test w/Stencil </h3>,
+        return ([
+            <h3>Router & Props Test w/Stencil </h3>,
             <stencil-route-link
                 url="/" >
                 Show Name
@@ -17,6 +17,6 @@ export class HeaderComponent {
                 url="/address" >
                 Show Address
             </stencil-route-link>
-            ])
+        ])
     }
 }
