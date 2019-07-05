@@ -1,4 +1,4 @@
 import {TodoList} from "./models/todo-list";
 
 
-export default new TodoList()
+export const todoListStore = new TodoList();
