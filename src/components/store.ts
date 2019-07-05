@@ -1,5 +1,5 @@
 import {action} from 'mobx/lib/mobx';
-import { extendObservable } from 'mobx';
+import {extendObservable} from 'mobx';
 
 class TodoList { 
   

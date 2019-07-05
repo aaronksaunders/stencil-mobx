@@ -1,20 +1,19 @@
-import { Component, State } from '@stencil/core';
+// @ts-ignore
+import {Component, h, State} from '@stencil/core';
 import store from '../store';
-import { autorun, observable } from 'mobx';
+import {autorun} from 'mobx';
 
 
 @Component({
     tag: 'my-app',
     //styleUrl: 'my-name.scss'
 })
+export class App {
 
-export observable(class App {
-
-    @State() todos: any
-    @State() title: string
+    @State() todos: any;
+    @State() title: string;
 
     constructor() {
-
         autorun(() => {
             // console.log(store)
             console.log(store.unfinishedTodoCount)
@@ -26,7 +25,7 @@ export observable(class App {
         return this.todos ? this.todos.map((m) => {
             return (<div>{m.title} {m.createdOn}  {m.finished}</div>)
         }) : null
-    }
+    };
 
     render() {
         return (
@@ -47,4 +46,4 @@ export observable(class App {
             </div >
         )
     }
-})
+}

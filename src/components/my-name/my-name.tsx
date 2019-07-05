@@ -1,4 +1,4 @@
-import { Component, Prop } from '@stencil/core';
+import {Component, h, Prop} from '@stencil/core';
 
 
 @Component({
@@ -11,7 +11,7 @@ export class MyName {
   @Prop() last: string;
 
   render() {
-    console.log(this.first)
+    console.log(this.first);
     return (
       <p>
         Hello, my name is {this.first} {this.last}
