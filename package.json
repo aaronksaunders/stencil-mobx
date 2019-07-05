@@ -15,8 +15,8 @@
     "test.watch": "jest --watch --no-cache"
   },
   "dependencies": {
-    "@stencil/core": "next",
-    "@stencil/router": "latest",
+    "@stencil/core": "^1.1.4",
+    "@stencil/router": "^1.0.1",
     "mobx": "3.4.1"
   },
   "devDependencies": {
