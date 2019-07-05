@@ -1,4 +1,4 @@
-import {action, extras, observable} from "mobx";
+import {action, computed, extras, observable} from "mobx";
 import {Todo} from "./todo";
 
 export class TodoList {
@@ -15,19 +15,19 @@ export class TodoList {
 
     }
 
+    @computed
     public get unfinishedTodoCount() {
         return this.todos
-            .slice()
             .filter((todo: Todo) => !todo.finished).length
     }
 
     @action
-    public add(_value) {
-        this.todos.push(new Todo(_value))
+    public add(todoTitle: string) {
+        this.todos.push(new Todo(todoTitle))
     }
 
     @action
-    public removeTodo(_todo: Todo) {
-        this.todos = this.todos.slice().filter(p => p.id !== _todo.id);
+    public removeTodo(todo: Todo) {
+        this.todos = this.todos.slice().filter(p => p.id !== todo.id);
     }
 }
