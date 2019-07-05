@@ -1,6 +1,6 @@
 // @ts-ignore
 import {Component, h, State} from '@stencil/core';
-import store from '../store';
+import store from '../todo-list.store';
 import {autorun} from 'mobx';
 
 
@@ -16,7 +16,7 @@ export class App {
     constructor() {
         autorun(() => {
             // console.log(store)
-            console.log(store.unfinishedTodoCount)
+            console.log(store.unfinishedTodoCount);
             this.todos = store.todos.slice()
         })
     }
