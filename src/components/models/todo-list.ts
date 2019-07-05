@@ -6,7 +6,7 @@ export class TodoList {
     [x: string]: any;
 
     @observable
-    public todos: Todo[];
+    public todos: Todo[] = [];
 
     constructor() {
         // this allows multiple independent mobx instances per page
