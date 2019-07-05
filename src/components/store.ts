@@ -1,11 +1,15 @@
 import {action} from 'mobx/lib/mobx';
-import {extendObservable} from 'mobx';
+import {extendObservable, extras} from 'mobx';
 
 class TodoList { 
   
   [x: string]: any;
 
   constructor() {
+    // this allows multiple independent mobx instances per page
+    // (good for isolated web components)
+    extras.isolateGlobalState();
+
     extendObservable(this, {
       todos: [],
       add: action(function add (_value) {
