@@ -6,12 +6,20 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  TodoItem,
+} from './components/models/todoItem';
+import {
+  TodoFinishedChangeEvent,
+} from './components/models/todo-finished-change.event';
 
 export namespace Components {
   interface MyApp {}
   interface MyHeader {}
   interface UiTodoInput {}
+  interface UiTodoTable {
+    'todos': TodoItem[];
+  }
 }
 
 declare global {
@@ -34,10 +42,17 @@ declare global {
     prototype: HTMLUiTodoInputElement;
     new (): HTMLUiTodoInputElement;
   };
+
+  interface HTMLUiTodoTableElement extends Components.UiTodoTable, HTMLStencilElement {}
+  var HTMLUiTodoTableElement: {
+    prototype: HTMLUiTodoTableElement;
+    new (): HTMLUiTodoTableElement;
+  };
   interface HTMLElementTagNameMap {
     'my-app': HTMLMyAppElement;
     'my-header': HTMLMyHeaderElement;
     'ui-todo-input': HTMLUiTodoInputElement;
+    'ui-todo-table': HTMLUiTodoTableElement;
   }
 }
 
@@ -47,11 +62,16 @@ declare namespace LocalJSX {
   interface UiTodoInput extends JSXBase.HTMLAttributes<HTMLUiTodoInputElement> {
     'onNewTodoTitle'?: (event: CustomEvent<string>) => void;
   }
+  interface UiTodoTable extends JSXBase.HTMLAttributes<HTMLUiTodoTableElement> {
+    'onTodoFinishedChange'?: (event: CustomEvent<TodoFinishedChangeEvent>) => void;
+    'todos'?: TodoItem[];
+  }
 
   interface IntrinsicElements {
     'my-app': MyApp;
     'my-header': MyHeader;
     'ui-todo-input': UiTodoInput;
+    'ui-todo-table': UiTodoTable;
   }
 }
 
