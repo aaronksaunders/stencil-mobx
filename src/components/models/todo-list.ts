@@ -29,9 +29,10 @@ export class TodoList {
         const todoIndex = this.findTodoIndexById(todoId);
         if (todoIndex === -1) {
             console.error(`Todo Item with id "${todoId}" was not found. Can't set it's status to finished!`)
+            return;
         }
-        this.todos[todoIndex].finished = isFinished;
 
+        this.todos[todoIndex].setFinished(isFinished);
         this.refreshTodoList();
     }
 

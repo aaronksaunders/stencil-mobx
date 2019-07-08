@@ -19,8 +19,8 @@ export class TodoItem {
         this.createdOn = new Date().getTime()
     }
 
-    public toggleState() {
-        this.finished = !this.finished;
+    public setFinished(isFinished: boolean) {
+        this.finished = isFinished;
         this.completedOn = this.finished ? new Date().getTime() : undefined
     }
 }
