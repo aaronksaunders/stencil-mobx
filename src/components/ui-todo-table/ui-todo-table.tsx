@@ -4,7 +4,8 @@ import {TodoFinishedChangeEvent} from "../models/todo-finished-change.event";
 
 @Component({
     tag: 'ui-todo-table',
-    styleUrl: 'ui-todo-table.scss'
+    styleUrl: 'ui-todo-table.scss',
+    shadow: true
 })
 export class UiTodoTable {
 
