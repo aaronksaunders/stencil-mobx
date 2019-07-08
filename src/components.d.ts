@@ -9,28 +9,12 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyAddress {
-    'city': string;
-    'state': string;
-    'street': string;
-  }
   interface MyApp {}
   interface MyHeader {}
-  interface MyName {
-    'first': string;
-    'last': string;
-  }
-  interface MyRoutes {}
 }
 
 declare global {
 
-
-  interface HTMLMyAddressElement extends Components.MyAddress, HTMLStencilElement {}
-  var HTMLMyAddressElement: {
-    prototype: HTMLMyAddressElement;
-    new (): HTMLMyAddressElement;
-  };
 
   interface HTMLMyAppElement extends Components.MyApp, HTMLStencilElement {}
   var HTMLMyAppElement: {
@@ -43,47 +27,19 @@ declare global {
     prototype: HTMLMyHeaderElement;
     new (): HTMLMyHeaderElement;
   };
-
-  interface HTMLMyNameElement extends Components.MyName, HTMLStencilElement {}
-  var HTMLMyNameElement: {
-    prototype: HTMLMyNameElement;
-    new (): HTMLMyNameElement;
-  };
-
-  interface HTMLMyRoutesElement extends Components.MyRoutes, HTMLStencilElement {}
-  var HTMLMyRoutesElement: {
-    prototype: HTMLMyRoutesElement;
-    new (): HTMLMyRoutesElement;
-  };
   interface HTMLElementTagNameMap {
-    'my-address': HTMLMyAddressElement;
     'my-app': HTMLMyAppElement;
     'my-header': HTMLMyHeaderElement;
-    'my-name': HTMLMyNameElement;
-    'my-routes': HTMLMyRoutesElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyAddress extends JSXBase.HTMLAttributes<HTMLMyAddressElement> {
-    'city'?: string;
-    'state'?: string;
-    'street'?: string;
-  }
   interface MyApp extends JSXBase.HTMLAttributes<HTMLMyAppElement> {}
   interface MyHeader extends JSXBase.HTMLAttributes<HTMLMyHeaderElement> {}
-  interface MyName extends JSXBase.HTMLAttributes<HTMLMyNameElement> {
-    'first'?: string;
-    'last'?: string;
-  }
-  interface MyRoutes extends JSXBase.HTMLAttributes<HTMLMyRoutesElement> {}
 
   interface IntrinsicElements {
-    'my-address': MyAddress;
     'my-app': MyApp;
     'my-header': MyHeader;
-    'my-name': MyName;
-    'my-routes': MyRoutes;
   }
 }
 

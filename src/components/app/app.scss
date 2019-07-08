@@ -6,3 +6,18 @@
   }
 
 }
+
+.add-button {
+  margin-left: 15px;
+  width: 60px;
+}
+
+form.level-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+}
+
+.finished {
+  text-decoration: line-through;
+}

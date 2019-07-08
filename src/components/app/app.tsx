@@ -23,17 +23,7 @@ export class App {
         })
     }
 
-    public renderTodos() {
-        return this.todos.map((m) => {
-            return (<tr>
-                <td>{m.title}</td>
-                <td>{new Date(m.createdOn).toISOString()}</td>
-                <td>{m.finished}</td>
-            </tr>)
-        })
-    }
-
-    public handleAddClick(clickEvent: MouseEvent) {
+    private handleAddClick(clickEvent: MouseEvent) {
         clickEvent.preventDefault();
 
         // add new \todo
@@ -43,21 +33,34 @@ export class App {
         this.title = '';
     }
 
+    private handleFinishedCheckbox(todo: Todo) {
+        todo.finished = !todo.finished;
+        todoListStore.replace(todo);
+    }
+
+
+    public renderTodos() {
+        return this.todos.map((t) => {
+            return (<tr>
+                <td class={(t.finished) ? 'finished'  : ''}>{t.title}</td>
+                <td>{new Date(t.createdOn).toISOString()}</td>
+                <td><input type="checkbox" value={(t.finished) ? 1 : 0}
+                           onChange={this.handleFinishedCheckbox.bind(this)}/></td>
+            </tr>)
+        })
+    }
     render() {
         return (
             <div class="section">
                 <my-header></my-header>
-                <my-routes></my-routes>
                 <div class="level">
                     {/* This `form`-Tag allows the `Add`-Button to be triggered by pressing `Enter` on the keyboard */}
                     <form class="level-item">
-                        <input class="input"
-                               placeholder="enter the title"
-                               value={this.title}
-                               onInput={(e: any) => {
+                        <input class="input" placeholder="enter new Todo title"
+                               value={this.title} onInput={(e: any) => {
                             this.title = e.target.value;
                         }} />
-                        <button type="submit" class="button" onClick={this.handleAddClick.bind(this)}>ADD</button>
+                        <button type="submit" class="add-button" onClick={this.handleAddClick.bind(this)}>ADD</button>
                     </form>
                     <h4 class="level-item">Unfinished: {todoListStore.unfinishedTodoCount}</h4>
                 </div>

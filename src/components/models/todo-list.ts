@@ -25,6 +25,13 @@ export class TodoList {
         this.todos.push(new Todo(todoTitle));
     }
 
+    public replace(todo: Todo) {
+        const todoIndex = this.todos.findIndex((todo) => todo.id === todo.id);
+        if (todoIndex !== -1) {
+           this.todos = [...this.todos.splice(todoIndex, 1, todo)]
+        }
+    }
+
     @action
     public removeTodo(todo: Todo) {
         this.todos = this.todos.slice().filter(p => p.id !== todo.id);
