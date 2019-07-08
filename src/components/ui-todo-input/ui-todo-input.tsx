@@ -1,5 +1,4 @@
 import {Component, Event, EventEmitter, h, State} from "@stencil/core";
-import {TodoItem} from "../models/todoItem";
 
 @Component({
     tag: 'ui-todo-input',
@@ -9,7 +8,7 @@ import {TodoItem} from "../models/todoItem";
 export class UiTodoInput {
 
     @State() title: string;
-    @Event() newTodo: EventEmitter;
+    @Event() newTodoTitle: EventEmitter<string>;
 
     constructor() {
     }
@@ -17,7 +16,7 @@ export class UiTodoInput {
     private handleAddClick(clickEvent: MouseEvent) {
         clickEvent.preventDefault();
         // add new todoItem
-        this.newTodo.emit(new TodoItem(this.title));
+        this.newTodoTitle.emit(this.title);
         // reset title
         this.title = '';
     }
