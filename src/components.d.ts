@@ -45,7 +45,7 @@ declare namespace LocalJSX {
   interface MyApp extends JSXBase.HTMLAttributes<HTMLMyAppElement> {}
   interface MyHeader extends JSXBase.HTMLAttributes<HTMLMyHeaderElement> {}
   interface UiTodoInput extends JSXBase.HTMLAttributes<HTMLUiTodoInputElement> {
-    'onNewTodo'?: (event: CustomEvent<any>) => void;
+    'onNewTodoTitle'?: (event: CustomEvent<string>) => void;
   }
 
   interface IntrinsicElements {
