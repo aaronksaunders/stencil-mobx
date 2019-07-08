@@ -21,7 +21,7 @@ export class TodoList {
     }
 
     @action
-    public add(todoTitle: string) {
+    public addTodoByTitle(todoTitle: string) {
         this.todos.push(new TodoItem(todoTitle));
     }
 
