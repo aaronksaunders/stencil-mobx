@@ -7,15 +7,16 @@
 
 }
 
-.add-button {
-  margin-left: 15px;
-  width: 60px;
-}
-
-form.level-item {
+.flex-row {
   display: flex;
   flex-flow: row nowrap;
-  align-items: stretch;
+  justify-content: space-between;
+
+  margin: 3em 0;
+
+  ui-todo-input {
+    width: 70%
+  }
 }
 
 .finished {

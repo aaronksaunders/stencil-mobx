@@ -11,7 +11,6 @@ import {TodoItem} from "../models/todoItem";
 })
 export class App {
 
-    @State() title: string;
     @State() todos: TodoItem[];
 
     constructor() {
@@ -21,16 +20,6 @@ export class App {
             // that `this.todos` is never undefined
             this.todos = [...todoListStore.todos];
         })
-    }
-
-    private handleAddClick(clickEvent: MouseEvent) {
-        clickEvent.preventDefault();
-
-        // add new \todo
-        todoListStore.add(this.title);
-
-        // reset title
-        this.title = '';
     }
 
     private handleFinishedCheckbox(event: Event) {
@@ -54,17 +43,11 @@ export class App {
     render() {
         return (
             <div class="section">
-                <my-header></my-header>
-                <div class="level">
-                    {/* This `form`-Tag allows the `Add`-Button to be triggered by pressing `Enter` on the keyboard */}
-                    <form class="level-item">
-                        <input class="input" placeholder="Enter new Todo Title"
-                               value={this.title} onInput={(e: any) => {
-                            this.title = e.target.value;
-                        }} />
-                        <button type="submit" class="add-button" onClick={this.handleAddClick.bind(this)}>ADD</button>
-                    </form>
-                    <h4 class="level-item">Unfinished: {todoListStore.unfinishedTodoCount}</h4>
+                <my-header/>
+
+                <div class="flex-row">
+                    <ui-todo-input onNewTodoTitle={(event: CustomEvent) => todoListStore.addTodoByTitle(event.detail)}/>
+                    <h4 class="level-right">Unfinished: {todoListStore.unfinishedTodoCount}</h4>
                 </div>
 
                 <table class="todo-table">
