@@ -2,7 +2,7 @@
 import {Component, h, State} from '@stencil/core';
 import {autorun} from 'mobx';
 import {todoListStore} from "../todo-list.store";
-import {Todo} from "../models/todo";
+import {TodoItem} from "../models/todoItem";
 
 
 @Component({
@@ -12,7 +12,7 @@ import {Todo} from "../models/todo";
 export class App {
 
     @State() title: string;
-    @State() todos: Todo[];
+    @State() todos: TodoItem[];
 
     constructor() {
 
@@ -33,9 +33,10 @@ export class App {
         this.title = '';
     }
 
-    private handleFinishedCheckbox(todo: Todo) {
-        todo.finished = !todo.finished;
-        todoListStore.replace(todo);
+    private handleFinishedCheckbox(event: Event) {
+        const checkbox = event.target as HTMLInputElement;
+        const todoId = Number.parseFloat(checkbox.getAttribute('data-todoId'));
+        todoListStore.setFinished(todoId, checkbox.checked)
     }
 
 
@@ -43,8 +44,9 @@ export class App {
         return this.todos.map((t) => {
             return (<tr>
                 <td class={(t.finished) ? 'finished'  : ''}>{t.title}</td>
-                <td>{new Date(t.createdOn).toISOString()}</td>
+                <td class={(t.finished) ? 'finished' : ''}>{new Date(t.createdOn).toISOString()}</td>
                 <td><input type="checkbox" value={(t.finished) ? 1 : 0}
+                           data-todoId={t.id}
                            onChange={this.handleFinishedCheckbox.bind(this)}/></td>
             </tr>)
         })
@@ -73,9 +75,7 @@ export class App {
                         <th>Finished</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {this.renderTodos()}
-                    </tbody>
+                    <tbody>{this.renderTodos()}</tbody>
                 </table>
             </div >
         )

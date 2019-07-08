@@ -1,6 +1,6 @@
 import {action, observable} from "mobx";
 
-export class Todo {
+export class TodoItem {
 
     public readonly id: number;
 
