@@ -11,6 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface MyApp {}
   interface MyHeader {}
+  interface UiTodoInput {}
 }
 
 declare global {
@@ -27,19 +28,30 @@ declare global {
     prototype: HTMLMyHeaderElement;
     new (): HTMLMyHeaderElement;
   };
+
+  interface HTMLUiTodoInputElement extends Components.UiTodoInput, HTMLStencilElement {}
+  var HTMLUiTodoInputElement: {
+    prototype: HTMLUiTodoInputElement;
+    new (): HTMLUiTodoInputElement;
+  };
   interface HTMLElementTagNameMap {
     'my-app': HTMLMyAppElement;
     'my-header': HTMLMyHeaderElement;
+    'ui-todo-input': HTMLUiTodoInputElement;
   }
 }
 
 declare namespace LocalJSX {
   interface MyApp extends JSXBase.HTMLAttributes<HTMLMyAppElement> {}
   interface MyHeader extends JSXBase.HTMLAttributes<HTMLMyHeaderElement> {}
+  interface UiTodoInput extends JSXBase.HTMLAttributes<HTMLUiTodoInputElement> {
+    'onNewTodo'?: (event: CustomEvent<any>) => void;
+  }
 
   interface IntrinsicElements {
     'my-app': MyApp;
     'my-header': MyHeader;
+    'ui-todo-input': UiTodoInput;
   }
 }
 
