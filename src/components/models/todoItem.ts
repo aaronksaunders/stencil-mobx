@@ -1,5 +1,3 @@
-import {action, observable} from "mobx";
-
 export class TodoItem {
 
     public readonly id: number;
@@ -12,7 +10,6 @@ export class TodoItem {
 
     public title: string;
 
-    @observable
     public finished: boolean;
 
 
@@ -22,7 +19,6 @@ export class TodoItem {
         this.createdOn = new Date().getTime()
     }
 
-    @action
     public toggleState() {
         this.finished = !this.finished;
         this.completedOn = this.finished ? new Date().getTime() : undefined
