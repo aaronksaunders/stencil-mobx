@@ -1,6 +1,7 @@
 import {Component, Event, EventEmitter, h, Prop} from "@stencil/core";
 import {TodoItem} from "../models/todoItem";
 import {TodoFinishedChangeEvent} from "../models/todo-finished-change.event";
+import 'ionicons';
 
 @Component({
     tag: 'ui-todo-table',
@@ -15,6 +16,9 @@ export class UiTodoTable {
     @Event()
     public todoFinishedChange: EventEmitter<TodoFinishedChangeEvent>;
 
+    @Event()
+    public deleteTodoItem: EventEmitter<number>;
+
     private handleFinishedCheckbox(event: Event) {
         const checkbox = event.target as HTMLInputElement;
         const todoId = Number.parseFloat(checkbox.getAttribute('data-todoId'));
@@ -26,9 +30,11 @@ export class UiTodoTable {
             return (<tr>
                 <td class={(t.finished) ? 'finished' : ''}>{t.title}</td>
                 <td class={(t.finished) ? 'finished' : ''}>{new Date(t.createdOn).toISOString()}</td>
+                <td>{(t.completedOn)? new Date(t.completedOn).toISOString(): ''}</td>
                 <td><input type="checkbox" value={(t.finished) ? 1 : 0}
                            data-todoId={t.id}
                            onChange={this.handleFinishedCheckbox.bind(this)}/></td>
+                <td><ion-icon name="trash" onClick={() => this.deleteTodoItem.emit(t.id)}/></td>
             </tr>)
         })
     }
@@ -40,7 +46,9 @@ export class UiTodoTable {
                 <tr>
                     <th>Todo Title</th>
                     <th>Created At</th>
+                    <th>Completed At</th>
                     <th>Finished</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>{this.renderTodos()}</tbody>

@@ -45,7 +45,7 @@ export class TodoList {
     }
 
     @action
-    public removeTodo(todo: TodoItem) {
-        this.todos = this.todos.slice().filter(p => p.id !== todo.id);
+    public removeTodo(todoId: number) {
+        this.todos = this.todos.filter(p => p.id !== todoId);
     }
 }

@@ -11,15 +11,32 @@ import {TodoItem} from "../models/todoItem";
 })
 export class App {
 
+    /**
+     * This local component state is needed, unfortunately,
+     * to trigger the render function.
+     * It would be nicer to directly access mobx state in render,
+     * but this will not re-render currently.
+     */
     @State() todos: TodoItem[];
 
     constructor() {
 
+        // this updates the local component state property `this.todos`
+        // to allow re-render of
         autorun(() => {
-            // this spread syntax has the advantage,
-            // that `this.todos` is never undefined
+            // this spread syntax has the advantage over using .splice() on the mobx array,
+            // that the local state property `this.todos` is never undefined,
+            // if no mobix state is present yet.
             this.todos = [...todoListStore.todos];
         })
+    }
+
+    private handleTodoFinishedChange({detail: todoItem}) {
+        todoListStore.setFinished(todoItem.todoId, todoItem.isFinished)
+    }
+
+    private handleDeleteTodoItem({detail: todoId}) {
+        todoListStore.removeTodo(todoId)
     }
 
     render() {
@@ -33,9 +50,9 @@ export class App {
                 </div>
 
                 <ui-todo-table todos={this.todos}
-                               onTodoFinishedChange={
-                                   ({detail}) => todoListStore.setFinished(detail.todoId, detail.isFinished)
-                               }/>
+                               onTodoFinishedChange={this.handleTodoFinishedChange.bind(this)}
+                               onDeleteTodoItem={this.handleDeleteTodoItem.bind(this)}
+                />
             </div >
         )
     }

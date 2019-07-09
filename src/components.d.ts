@@ -63,6 +63,7 @@ declare namespace LocalJSX {
     'onNewTodoTitle'?: (event: CustomEvent<string>) => void;
   }
   interface UiTodoTable extends JSXBase.HTMLAttributes<HTMLUiTodoTableElement> {
+    'onDeleteTodoItem'?: (event: CustomEvent<number>) => void;
     'onTodoFinishedChange'?: (event: CustomEvent<TodoFinishedChangeEvent>) => void;
     'todos'?: TodoItem[];
   }
