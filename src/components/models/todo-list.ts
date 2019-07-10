@@ -22,9 +22,13 @@ export class TodoList {
 
     @action
     public addTodoByTitle(todoTitle: string) {
-        this.todos.push(new TodoItem(todoTitle));
+        // Array.push would also work at this place,
+        // but I decided on this syntax to be consistent with the other setters,
+        // which must replace the array for change detection of mobx to work.
+        this.todos = [...this.todos, new TodoItem(todoTitle)];
     }
 
+    @action
     public setFinished(todoId: number, isFinished: boolean) {
         const todoIndex = this.findTodoIndexById(todoId);
         if (todoIndex === -1) {
@@ -46,6 +50,7 @@ export class TodoList {
 
     @action
     public removeTodo(todoId: number) {
+        // filter returns a new array, so change detection of mobx works as expected.
         this.todos = this.todos.filter(p => p.id !== todoId);
     }
 }
