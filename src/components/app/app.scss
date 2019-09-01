@@ -1,0 +1,18 @@
+
+ui-todo-table {
+  width: 100%;
+}
+
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  margin: 3em 0;
+
+  ui-todo-input {
+    width: 70%
+  }
+}
+
+

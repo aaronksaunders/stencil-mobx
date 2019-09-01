@@ -1,50 +1,59 @@
-import { Component, State } from '@stencil/core';
-import store from '../store';
-import { autorun, observable } from 'mobx';
+// @ts-ignore
+import {Component, h, State} from '@stencil/core';
+import {autorun} from 'mobx';
+import {todoListStore} from "../todo-list.store";
+import {TodoItem} from "../models/todoItem";
 
 
 @Component({
     tag: 'my-app',
-    //styleUrl: 'my-name.scss'
+    styleUrl: 'app.scss'
 })
+export class App {
 
-export observable(class App {
-
-    @State() todos: any
-    @State() title: string
+    /**
+     * This local component state is needed, unfortunately,
+     * to trigger the render function.
+     * It would be nicer to directly access mobx state in render,
+     * but this will not re-render currently.
+     */
+    @State() todos: TodoItem[];
 
     constructor() {
 
+        // this updates the local component state property `this.todos`
+        // to allow re-render of
         autorun(() => {
-            // console.log(store)
-            console.log(store.unfinishedTodoCount)
-            this.todos = store.todos.slice()
+            // this spread syntax has the advantage over using .splice() on the mobx array,
+            // that the local state property `this.todos` is never undefined,
+            // if no mobix state is present yet.
+            this.todos = [...todoListStore.todos];
         })
     }
 
-    renderTodos = () => {
-        return this.todos ? this.todos.map((m) => {
-            return (<div>{m.title} {m.createdOn}  {m.finished}</div>)
-        }) : null
+    private handleTodoFinishedChange({detail: todoItem}) {
+        todoListStore.setFinished(todoItem.todoId, todoItem.isFinished)
+    }
+
+    private handleDeleteTodoItem({detail: todoId}) {
+        todoListStore.removeTodo(todoId)
     }
 
     render() {
         return (
             <div class="section">
-                <my-header></my-header>
-                <my-routes></my-routes>
-                <div class="level">
-                    <div class="level-item">
-                        <button class="button" onClick={() => store.add(this.title)}>ADD</button>
-                        <input class="input" placeholder="enter the title" onChange={(e: any) => {
-                            this.title = e.target.value
-                            console.log(e.target.value)
-                        }} />
-                    </div>
-                    <h4 class="level-item">Unfinished: {store.unfinishedTodoCount}</h4>
+                <my-header/>
+
+                <div class="flex-row">
+                    <ui-todo-input onNewTodoTitle={(event: CustomEvent) => todoListStore.addTodoByTitle(event.detail)}/>
+                    <h4 class="level-right">Unfinished: {todoListStore.unfinishedTodoCount}</h4>
                 </div>
-                {this.renderTodos()}
+
+                <ui-todo-table todos={this.todos}
+                               onTodoFinishedChange={this.handleTodoFinishedChange.bind(this)}
+                               onDeleteTodoItem={this.handleDeleteTodoItem.bind(this)}
+                />
             </div >
         )
     }
-})
+}

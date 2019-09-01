@@ -1,0 +1,11 @@
+.todo-table  {
+  width: 100%;
+  text-align: left;
+  th {
+    text-decoration: underline;
+  }
+}
+
+.finished {
+  text-decoration: line-through;
+}
